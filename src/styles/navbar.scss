@@ -1,0 +1,110 @@
+.nav {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 0 30px;
+
+
+    .nav_left {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      .logo {
+        height: 50px; /* 固定高度 */
+        width: auto; /* 宽度自适应 */
+        display: block;
+      }
+    }
+
+    .nav_right {
+      height: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .title {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 20px;
+      white-space: nowrap;
+      color: var(--txt-w-pure);
+    }
+    
+    .title:hover {
+      color: var(--txt-w-pure);
+    }
+    
+    .nav_right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+    }
+    
+    .nav_list {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    
+    .nav_item {
+      margin: 0 5px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+    }
+    
+    /* 当前选中导航的样式 */
+    .nav_item_active{
+      background-color: var(--b-alpha-5);
+      border-radius: 5px;
+    }
+    
+    .nav_item:hover {
+      background-color: var(--b-alpha-5);
+      border-radius: 5px;
+      color: var(--txt-w-pure);
+    }
+    
+    .nav_item_icon {
+      margin-right: 4px;
+      font-size: 18px;
+    }
+    
+    .nav_item_title {
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    
+    .nav_type {
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      background: var(--ct-theme);
+      border: var(--ct-theme-border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .nav_type_item {
+      padding: 5px;
+      font-size: 24px;
+      transform: translateY(-40px);
+      transition: 1s;
+    }
+    
+    .nav_type_item_active {
+      transform: translateY(0);
+    }
+    
+  }
+
+
