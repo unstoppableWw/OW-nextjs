@@ -1,3 +1,5 @@
+@import url('./font.scss');
+
 .home {
     width: 100vw;
 
@@ -16,7 +18,91 @@
         object-fit: cover;
       }
     }
+    .bg_content_box{
+      width: 100%;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      z-index: -99;
+    }
+    .bg_content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
 
+     .title {
+        height: 120px;
+        font-size: 60px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 添加黑色阴影 */
+        font-family: "阿里妈妈东方大楷 Regular", serif;
+     }
+
+     .description_box {
+      width: 80%;
+      height: 72px;
+      display: flex;
+      justify-content: center;
+
+      .description{
+        line-height: 1.3;
+        color: var(--txt-w-pure);
+        font-size: 26px;
+        font-weight: bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 添加黑色阴影 */
+        font-family: "楷体","华文楷体";
+        text-align: center;
+      }
+    }
+    }
+    .project{
+      width: 100vw;
+      height: 100vh;
+      background-color: #ffffffcc;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      padding: 70px 0;
+
+      .project_title{
+        margin: 30px auto;
+        white-space: nowrap;
+        font-size: 30px;
+        color: var(--b-alpha);
+        font-weight: bolder;
+        text-align: center;
+        position: relative;
+      }
+
+      .project_title::after {
+        position: absolute;
+        content: "";
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -20px;
+        width: 20%;
+        height: 3px;
+        background-color: #727cf5;
+        transition: width 0.5s ease-in-out;
+        border-radius: 3px;
+      }
+      .project_title:hover::after {
+        width: 80%;
+    }
+    }
+
+    // @keyframes gradient  {
+    //   0%{
+    //     width: 20%;
+    //   }
+    //   100%{
+    //     width: 80%;
+    //   }
+    // }
     // .title {
     //   height: 55px;
     //   font-size: 26px;
