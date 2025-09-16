@@ -92,6 +92,16 @@ const Home = () => {
       </div>
       <div className="timeAixs_box">
         <SubTitle title="Rebecca FangYan" desc="更多商品" />
+        <div className="timeAixs">
+        <div className="timeAixs_content">
+          {timeAixsList?.map((v) => (
+            <div className="timeAixs_item" key={v.id}>
+              <div className="timeAixs_item_time">{v.time}</div>
+              <div className="timeAixs_item_title">{v.title}</div>
+            </div>
+          ))}
+          </div>
+        </div>
         {/* <div className={styles.timeAixs}>
           <div className={styles.timeAixs_content}>
             {timeAixsList?.map((v) => (
