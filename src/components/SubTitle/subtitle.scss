@@ -1,0 +1,44 @@
+.subtitle {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .subtitle_title{
+    margin: 30px auto;
+    white-space: nowrap;
+    font-size: 30px;
+    color: var(--b-alpha);
+    font-weight: bolder;
+    text-align: center;
+    position: relative;
+  }
+
+  .subtitle_title::after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -20px;
+    width: 20%;
+    height: 3px;
+    background-color: #727cf5;
+    transition: width 0.5s ease-in-out;
+    border-radius: 3px;
+  }
+  .subtitle_title:hover::after {
+    width: 80%;
+  }
+  .subtitle_desc{
+    height: 50px;
+    font-size: 14px;
+    color:  #00000099;
+    padding-bottom: 20px;
+    margin: 10 auto 0 auto;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+  }
+
+
+}

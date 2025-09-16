@@ -2,14 +2,13 @@
 import "@styles/home.scss";
 import "@styles/global.scss";
 import "@styles/center.scss";
-import Title from "@/components/Title";
+import SubTitle from "@/components/SubTitle";
 import Down from "@/components/Down";
-// import Article from "@/components/Article";
-// import Profile from "@/components/Profile";
-// import "@/styles/bottom.scss";
+import { timeAixsList } from "@/utils/dict";
 import Typed from "typed.js";
 import Image from "next/image";
 import bgImgLight from "@public/xia1.jpg";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 const Home = () => {
 
@@ -57,8 +56,56 @@ const Home = () => {
         </div>
       </div>
       <div className="project">
-        <div className="project_title">Rebecca FangYan</div>
-        <div className="projecte_desc">购买入口</div>
+        <SubTitle title="Rebecca FangYan" desc="更多商品" />
+        <div className="project_btn">
+          <div className="project_btn_box">
+          <Image
+          className="project_btn_bgbox"
+              width={2000}
+              height={1320}
+              src={
+                "https://api-render.wp-boke.work/picture/daily-bing?is_redirect=true"
+              }
+              alt="必应每日壁纸"
+              priority={true}
+            />
+            <Link className="project_link" href="/news">
+              热 点
+            </Link>
+          </div>
+          <div className="project_btn_box">
+          <Image
+          className="project_btn_bgbox"
+              width={2000}
+              height={1320}
+              src={
+                "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg"
+              }
+              alt="热点"
+              priority={true}
+            />
+              <Link className="project_link" href="/news">
+              热 点
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="timeAixs_box">
+        <SubTitle title="Rebecca FangYan" desc="更多商品" />
+        {/* <div className={styles.timeAixs}>
+          <div className={styles.timeAixs_content}>
+            {timeAixsList?.map((v) => (
+              <div className={styles.timeAixs_item} key={v.id}>
+                <div className={styles.timeAixs_item_time}>{v.time}</div>
+                <div className={styles.timeAixs_item_title}>{v.title}</div>
+              </div>
+            ))}
+            <div className={styles.timeAixs_item}>
+              <div className={styles.timeAixs_item_desc}>GROWING...</div>
+              <div className={styles.timeAixs_item_desc}>COMING SOON</div>
+            </div>
+          </div>
+        </div> */}
       </div>
 
     </div>
