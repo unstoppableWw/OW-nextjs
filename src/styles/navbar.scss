@@ -9,6 +9,33 @@
     left: 0;
     z-index: 10;
     padding: 0 30px;
+    transition: background-color 200ms ease, backdrop-filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+
+    // 顶部透明
+    &.nav--transparent {
+      background-color: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+    }
+
+    // 下滑后磨砂
+    &.nav--frosted {
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: saturate(150%) blur(10px);
+      -webkit-backdrop-filter: saturate(150%) blur(10px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      
+      // 文字与链接在浅底上的可读性
+      .title { color: #111; }
+      .nav_item { color: #111; border-color: rgba(0,0,0,0); }
+      .nav_item:hover { color: inherit; background-color: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.7); }
+      .nav_item_active { background-color: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.3); }
+    }
+
+    // 向下滚动隐藏
+    &.nav--hidden {
+      transform: translateY(-100%);
+    }
 
 
     .nav_left {
@@ -30,8 +57,10 @@
     }
 
     .title {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .2px;
       white-space: nowrap;
       color: var(--txt-w-pure);
     }
@@ -55,23 +84,37 @@
     }
     
     .nav_item {
-      margin: 0 5px;
-      padding: 5px 10px;
+      margin: 0 6px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
       color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .2px;
+      line-height: 1;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+    }
+
+    // 顶部透明时维持白色文字
+    &.nav--transparent {
+      .nav_item { color: #fff; border-color: rgba(255,255,255,0); }
+      .title { color: var(--txt-w-pure); }
     }
     
     /* 当前选中导航的样式 */
     .nav_item_active{
       background-color: var(--b-alpha-5);
-      border-radius: 5px;
+      border-radius: 12px;
     }
     
     .nav_item:hover {
-      background-color: var(--b-alpha-5);
-      border-radius: 5px;
-      color: var(--txt-w-pure);
+      border-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.08);
+      color: inherit;
     }
     
     .nav_item_icon {
@@ -80,7 +123,7 @@
     }
     
     .nav_item_title {
-      font-size: 16px;
+      font-size: 15px;
       white-space: nowrap;
     }
     

@@ -1,6 +1,6 @@
 "use client";
 import { navList } from "./routes";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -11,6 +11,41 @@ import '@styles/navbar.scss'
 export default function Navbar() {
   const pathname = usePathname();
   const [avtive, setActive] = useState(false);
+  const [isFrosted, setIsFrosted] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const tickingRef = useRef(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY || 0;
+
+      if (!tickingRef.current) {
+        window.requestAnimationFrame(() => {
+          const atTop = currentY <= 2;
+          setIsFrosted(!atTop);
+
+          const lastY = lastScrollYRef.current;
+          const isScrollingDown = currentY > lastY;
+
+          // 添加阈值，避免微小滚动抖动
+          const threshold = 6;
+          if (Math.abs(currentY - lastY) > threshold) {
+            setIsHidden(isScrollingDown && !atTop);
+            lastScrollYRef.current = currentY;
+          }
+
+          tickingRef.current = false;
+        });
+        tickingRef.current = true;
+      }
+    };
+
+    lastScrollYRef.current = window.scrollY || 0;
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // 导航item
   const navItem = (obj) => {
@@ -28,7 +63,7 @@ export default function Navbar() {
   
   return (
     <>
-      <div className="nav" id="layout_nav">
+      <div className={`nav ${isFrosted ? "nav--frosted" : "nav--transparent"} ${isHidden ? "nav--hidden" : ""}`} id="layout_nav">
         <div className="nav_left">
           <Link href="/">
             {/* 修复className语法错误 */}
