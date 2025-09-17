@@ -3,12 +3,9 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'api-render.wp-boke.work',
+        hostname: 'img.foreverblog.cn',
       },
-      {
-        protocol: 'https',
-        hostname: 'images.pexels.com',
-      }
+      // 可以继续添加其他需要的主机名
     ],
   },
 }

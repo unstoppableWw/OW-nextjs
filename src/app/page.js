@@ -63,9 +63,7 @@ const Home = () => {
           className="project_btn_bgbox"
               width={2000}
               height={1320}
-              src={
-                "https://api-render.wp-boke.work/picture/daily-bing?is_redirect=true"
-              }
+              src={bgImgLight}
               alt="必应每日壁纸"
               priority={true}
             />
@@ -78,9 +76,7 @@ const Home = () => {
           className="project_btn_bgbox"
               width={2000}
               height={1320}
-              src={
-                "https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg"
-              }
+              src={bgImgLight}
               alt="热点"
               priority={true}
             />
@@ -102,20 +98,7 @@ const Home = () => {
           ))}
           </div>
         </div>
-        {/* <div className={styles.timeAixs}>
-          <div className={styles.timeAixs_content}>
-            {timeAixsList?.map((v) => (
-              <div className={styles.timeAixs_item} key={v.id}>
-                <div className={styles.timeAixs_item_time}>{v.time}</div>
-                <div className={styles.timeAixs_item_title}>{v.title}</div>
-              </div>
-            ))}
-            <div className={styles.timeAixs_item}>
-              <div className={styles.timeAixs_item_desc}>GROWING...</div>
-              <div className={styles.timeAixs_item_desc}>COMING SOON</div>
-            </div>
-          </div>
-        </div> */}
+
       </div>
 
     </div>
