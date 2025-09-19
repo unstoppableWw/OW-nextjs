@@ -10,12 +10,26 @@ import Image from "next/image";
 import bgImgLight from "@public/xia1.jpg";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import axios from "@/utils/axios";
 const Home = () => {
 
   const typeTarget = useRef(null);
 
   useEffect(() => {
-    // bindHandleScroll();
+    const res = async () => {
+      try {
+        await axios.post('/api/tracking', {
+          pageUrl:  window.location.href,
+          referrer: document.referrer,
+          duration: 888
+        });
+      } catch (e) {
+        console.error('Failed to record visit:', e);
+      }
+    }
+    res().then(res => {
+      console.log(res);
+    });
     const typed = new Typed(typeTarget.current, {
       strings: [
         "年少时，春风得意马蹄疾，不信人间有别离。",
