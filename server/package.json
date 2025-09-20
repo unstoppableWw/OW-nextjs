@@ -8,6 +8,7 @@
     "dev": "nodemon app.js",
     "test": "jest",
     "init-db": "mongosh init.js",
+    "sync-banners": "node scripts/sync-banners.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

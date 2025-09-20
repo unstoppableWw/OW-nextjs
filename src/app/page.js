@@ -9,27 +9,41 @@ import Typed from "typed.js";
 import Image from "next/image";
 import bgImgLight from "@public/xia1.jpg";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "@/utils/axios";
 const Home = () => {
 
   const typeTarget = useRef(null);
+  const [img, setImg] = useState([]);
+
+  const recordVisit = async () => {
+    try {
+      const result = await axios.post('/api/tracking', {
+        pageUrl: window.location.href,
+        referrer: document.referrer,
+        duration: 888
+      });
+      console.log('Visit recorded:', result.data);
+    } catch (e) {
+      console.error('Failed to record visit:', e);
+    }
+  }
+
+  const loadBanners = async () => {
+    try {
+      const response = await axios.get('/api/banners');
+      const bannerUrls = response.data.data.map(item => item.url);
+      setImg(bannerUrls);
+      console.log('Banners loaded:', response);
+    } catch (e) {
+      console.error('Failed to load banners:', e);
+    }
+  }
 
   useEffect(() => {
-    const res = async () => {
-      try {
-        await axios.post('/api/tracking', {
-          pageUrl:  window.location.href,
-          referrer: document.referrer,
-          duration: 888
-        });
-      } catch (e) {
-        console.error('Failed to record visit:', e);
-      }
-    }
-    res().then(res => {
-      console.log(res);
-    });
+    recordVisit();
+    loadBanners();
+
     const typed = new Typed(typeTarget.current, {
       strings: [
         "年少时，春风得意马蹄疾，不信人间有别离。",

@@ -5,81 +5,87 @@
 const conn = new Mongo();
 const db = conn.getDB("ow");
 
-// 创建tracking集合（表）
-db.createCollection("tracking", {
+// 删除现有的banners集合（如果存在）
+try {
+  db.banners.drop();
+  print("已删除现有的banners集合");
+} catch (error) {
+  print("banners集合不存在或删除失败:", error.message);
+}
+
+// 创建banners集合（表）
+db.createCollection("banners", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["ip", "userAgent", "timestamp"],
+      required: ["fileName", "createdAt"],
       properties: {
-        ip: {
+        fileName: {
           bsonType: "string",
-          description: "用户IP地址，必须为字符串且必填"
+          description: "图片文件名，必须为字符串且必填"
         },
-        userAgent: {
+        url: {
           bsonType: "string",
-          description: "用户浏览器信息，必须为字符串且必填"
+          description: "图片访问URL，必须为字符串且必填"
         },
-        duration: {
+        title: {
+          bsonType: "string",
+          description: "图片标题"
+        },
+        description: {
+          bsonType: "string",
+          description: "图片描述"
+        },
+        category: {
+          bsonType: "string",
+          description: "图片分类"
+        },
+        isActive: {
+          bsonType: "bool",
+          description: "是否启用，默认为true"
+        },
+        sortOrder: {
           bsonType: "int",
           minimum: 0,
-          description: "停留时间（秒），必须为非负整数"
+          description: "排序顺序，数字越小越靠前"
         },
-        timestamp: {
+        createdAt: {
           bsonType: "date",
-          description: "访问时间，必须为日期且必填"
+          description: "创建时间，必须为日期且必填"
         },
-        pageUrl: {
-          bsonType: "string",
-          description: "访问页面URL"
-        },
-        referrer: {
-          bsonType: "string",
-          description: "来源页面"
+        updatedAt: {
+          bsonType: "date",
+          description: "更新时间"
         }
       }
     }
   }
 });
 
-// 创建索引以提高查询性能
-db.tracking.createIndex({ "timestamp": -1 });
-db.tracking.createIndex({ "ip": 1 });
-db.tracking.createIndex({ "duration": -1 });
 
-// 插入一些示例数据
-db.tracking.insertMany([
+
+// 插入一些banner示例数据
+// 注意：使用相对路径，前端可以直接访问
+db.banners.insertMany([
   {
-    ip: "192.168.1.100",
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-    duration: 45,
-    timestamp: new Date("2023-10-01T10:30:00Z"),
-    pageUrl: "https://example.com/home",
-    referrer: "https://google.com"
-  },
-  {
-    ip: "172.16.0.55",
-    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15",
-    duration: 120,
-    timestamp: new Date("2023-10-01T11:15:00Z"),
-    pageUrl: "https://example.com/products",
-    referrer: "https://baidu.com"
-  },
-  {
-    ip: "10.0.0.200",
-    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15",
-    duration: 30,
-    timestamp: new Date("2023-10-01T12:00:00Z"),
-    pageUrl: "https://example.com/about",
-    referrer: ""
+    fileName: "banner1.png",
+    url: "/banners/banner1.png",
+    title: "首页轮播图1",
+    description: "这是第一张轮播图",
+    category: "homepage",
+    isActive: true,
+    sortOrder: 1,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ]);
 
 // 验证集合创建成功
 print("数据库 'ow' 创建成功！");
-print("集合 'tracking' 创建成功！");
-print("已插入 " + db.tracking.countDocuments() + " 条示例数据");
+print("集合 'banners' 创建成功！");
+print("已插入 " + db.banners.countDocuments() + " 条banner示例数据");
 
 // 显示集合结构
-print("\n集合结构:");
-printjson(db.tracking.find().sort({ _id: 1 }));
+
+print("\nBanners集合结构:");
+printjson(db.banners.find().sort({ sortOrder: 1 }));
