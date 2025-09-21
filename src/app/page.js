@@ -32,9 +32,16 @@ const Home = () => {
   const loadBanners = async () => {
     try {
       const response = await axios.get('/api/banners');
-      const bannerUrls = response.data.data.map(item => item.url);
+      const baseURL = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3001';
+      const bannerUrls = response.data.data.map(item => {
+        // 如果URL已经是完整URL，直接返回；否则拼接baseURL
+        if (item.url.startsWith('http://') || item.url.startsWith('https://')) {
+          return item.url;
+        }
+        return `${baseURL}${item.url}`;
+      });
       setImg(bannerUrls);
-      console.log('Banners loaded:', response);
+      console.log('Banners loaded:', bannerUrls);
     } catch (e) {
       console.error('Failed to load banners:', e);
     }
